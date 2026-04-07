@@ -1,0 +1,21 @@
+{
+	"name": "Buzzshock",
+	"namespace": "Avislime",
+	"version_number": "0.1.0",
+	"description": "N/A",
+	"dependencies": [],
+	"website_url": "",
+	"extra": {
+		"godot": {
+			"authors": ["Avislime"],
+			"tags": [],
+			"description_rich": "",
+			"optional_dependencies": [],
+			"load_before": [],
+			"incompatibilities": [],
+			"compatible_mod_loader_version": ["6.2.0"],
+			"compatible_game_version": ["2.2.0"],
+			"config_schema": {}
+		}
+	}
+}

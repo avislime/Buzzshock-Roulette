@@ -1,0 +1,18 @@
+.godot/
+addons/
+audio/
+fonts/
+GodotRetro/
+instances/
+localization/
+main player/
+materials/
+misc/
+models/
+multiplayer/
+scenes/
+scripts/
+textures/
+default_bus_layout.tres
+gdre_export.log
+project.godot
