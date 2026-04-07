@@ -149,7 +149,7 @@ var default_config_data = {
 				"Enabled": true,
 				"Action": "vibrate",
 				"Intensity":25,
-				"Duration":3,
+				"Duration":1.25,
 				"Random Shocker": false},
 			"Expired Medicine":
 				{"Success":
@@ -331,7 +331,7 @@ func BuzzshockEvent(case):
 			await get_tree().create_timer(1).timeout
 		"Handsaw":
 			event = config_data["Events"]["Items"]["Handsaw"]
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(0.75).timeout
 		"MedicineSucceed":
 			event = config_data["Events"]["Items"]["Expired Medicine"]["Succeed"]
 		"MedicineFail":
@@ -346,7 +346,7 @@ func BuzzshockEvent(case):
 			await get_tree().create_timer(4).timeout
 		"Adrenaline":
 			event = config_data["Events"]["Items"]["Adrenaline"]
-			await get_tree().create_timer(3.1).timeout
+			await get_tree().create_timer(3.25).timeout
 	if event["Enabled"]:
 		ModLoaderLog.debug("Sending command: %s at %s percent, %s seconds." % 
 						   [case, event["Action"], event["Intensity"], event["Duration"]],

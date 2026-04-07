@@ -68,7 +68,7 @@
 			},
 			"Handsaw": {
 				"Action": "vibrate",
-				"Duration": 3,
+				"Duration": 1.25,
 				"Enabled": true,
 				"Intensity": 25,
 				"Random Shocker": false
