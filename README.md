@@ -5,11 +5,15 @@ Made on Buckshot Roulette 2.2.0.6, built for [BRML-E](https://github.com/D1GQ/Bu
 Made this in 2 days after having 0 knowledge on scripting in Godot for fun. Not much else to it, nor is it tested super thoroughly. It's on the list, however.
 
 * Features:
-  * Granular event types (All Shots and All Double or Nothing items supported, including each outcome for Expired Medicine)
+  * Granular event types
+   * Gunshots (Bullet live or blank, sawed, killing blow, shooter and target)
+   * All Double or Nothing Items
+    * Expired medicine outcomes have separate events
   * Config in human readable JSON
 
 * Todo:
   * Actually sane configuration defaults
+  * Add Events for kicking the doors down. For the bit.
   * Port to BRMLNeo (On hold until release)
   * Multiplayer support (On hold)
   * Intiface support (Maybe)
