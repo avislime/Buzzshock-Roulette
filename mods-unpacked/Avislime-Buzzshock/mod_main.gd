@@ -4,13 +4,16 @@ const AUTHORNAME_MODNAME_DIR := "Avislime-Buzzshock"
 const AUTHORNAME_MODNAME_LOG_NAME := "Avislime-Buzzshock:Main"
 
 var mod_dir_path := ""
-var extensions = ["extensions/DealerIntelligence.gd",
-				  "extensions/DeathManager.gd",
-				  "extensions/ItemInteraction.gd",
-				  "extensions/MedicineManager.gd",
-				  "extensions/ShotgunShooting.gd"]
-var config_data = {}
+var extensions = ["extensions/scripts/DealerIntelligence.gd",
+				  "extensions/scripts/DeathManager.gd",
+				  "extensions/scripts/ItemInteraction.gd",
+				  "extensions/scripts/MedicineManager.gd",
+				  "extensions/scripts/ShotgunShooting.gd",
+				  "extensions/multiplayer/scripts/user scripts/MP_ItemInteraction.gd",
+				  "extensions/multiplayer/scripts/user scripts/MP_Jammer.gd",
+				  "extensions/multiplayer/scripts/user scripts/MP_ShotgunInteraction.gd"]
 var ConfigManager = load("res://mods-unpacked/Avislime-Buzzshock/config_manager.gd").new()
+var config_data = {}
 
 var socket_multishock = WebSocketPeer.new()
 var url_multishock = ""
@@ -78,85 +81,116 @@ func _process(delta):
 		pass
 
 func BuzzshockEvent(case):
-	ModLoaderLog.debug("Buzzshock event called: %s" % case, AUTHORNAME_MODNAME_LOG_NAME)
-	var event = {"Enabled": false,
-				 "Intensity": 50,
-				 "Duration": 1,
-				 "Action": "vibrate",
-				 "Random Shocker": false}
-	match(case):
-		# Grab event command parameters from config
-		"Test":
-			MultishockCommand(25, 1, "all", "vibrate")
-		"PlayerShotOther":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Live"]
-		"PlayerShotOtherSawed":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Sawed"]
-		"PlayerShotOtherBlank":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Blank"]
-		"PlayerKilledOther":
-			event = config_data["Events"]["Shots"]["Player"]["Player killed Other"]
-		"PlayerShotSelf":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Live"]
-		"PlayerShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Sawed"]
-		"PlayerShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Blank"]
-		"PlayerKilledSelf":
-			event = config_data["Events"]["Shots"]["Player"]["Player killed Self"]
-		"OtherShotPlayer":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Live"]
-		"OtherShotPlayerSawed":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Sawed"]
-		"OtherShotPlayerBlank":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Blank"]
-		"OtherKilledPlayer":
-			event = config_data["Events"]["Shots"]["Other"]["Other killed Player"]
-		"OtherShotSelf":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Live"]
-		"OtherShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Sawed"]
-		"OtherShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Blank"]
-		"OtherKilledSelf":
-			event = config_data["Events"]["Shots"]["Other"]["Other killed Self"]
-		"Handcuffs":
-			event = config_data["Events"]["Items"]["Handcuffs"]
-		"Beer":
-			event = config_data["Events"]["Items"]["Beer"]
-			await get_tree().create_timer(0.5).timeout
-		"Magnifying Glass":
-			event = config_data["Events"]["Items"]["Magnifying Glass"]
-		"Cigarettes":
-			event = config_data["Events"]["Items"]["Cigarettes"]
-			await get_tree().create_timer(1).timeout
-		"Handsaw":
-			event = config_data["Events"]["Items"]["Handsaw"]
-			await get_tree().create_timer(0.75).timeout
-		"MedicineSucceed":
-			event = config_data["Events"]["Items"]["Expired Medicine"]["Succeed"]
-		"MedicineFail":
-			event = config_data["Events"]["Items"]["Expired Medicine"]["Fail"]
-		"MedicineDeath":
-			event = config_data["Events"]["Items"]["Expired Medicine"]["Death"]
-		"Inverter":
-			event = config_data["Events"]["Items"]["Inverter"]
-			await get_tree().create_timer(1.5).timeout
-		"Burner Phone":
-			event = config_data["Events"]["Items"]["Burner Phone"]
-			await get_tree().create_timer(4).timeout
-		"Adrenaline":
-			event = config_data["Events"]["Items"]["Adrenaline"]
-			await get_tree().create_timer(3.25).timeout
-	if event["Enabled"]:
-		ModLoaderLog.debug("Sending command: %s at %s percent, %s seconds." % 
-						   [case, event["Action"], event["Intensity"], event["Duration"]],
-						   AUTHORNAME_MODNAME_LOG_NAME)
-		MultishockCommand(event["Intensity"], event["Duration"],
-		"random" if event["Random Shocker"] else "all", event["Action"])
+	ModLoaderLog.info("Buzzshock event called: %s" % case, AUTHORNAME_MODNAME_LOG_NAME)
+	if is_multishock_connected:
+		var event = {"Enabled": false,
+					 "Intensity": 25,
+					 "Duration": 0.1,
+					 "Action": "vibrate",
+					 "Random Shocker": false}
+		match(case):
+			# Grab event command parameters from config
+			"Test":
+				MultishockCommand(25, 1, "all", "vibrate")
+			"PlayerShotOther":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Live"]
+			"PlayerShotOtherSawed":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Sawed"]
+			"PlayerShotOtherBlank":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Blank"]
+			"PlayerKilledOther":
+				event = config_data["Events"]["Shots"]["Player"]["Player killed Other"]
+			"PlayerShotSelf":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Live"]
+			"PlayerShotSelfSawed":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Sawed"]
+			"PlayerShotSelfBlank":
+				event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Blank"]
+			"PlayerKilledSelf":
+				event = config_data["Events"]["Shots"]["Player"]["Player killed Self"]
+			"OtherShotPlayer":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Live"]
+			"OtherShotPlayerSawed":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Sawed"]
+			"OtherShotPlayerBlank":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Blank"]
+			"OtherKilledPlayer":
+				event = config_data["Events"]["Shots"]["Other"]["Other killed Player"]
+			"OtherShotSelf":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Live"]
+			"OtherShotSelfSawed":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Sawed"]
+			"OtherShotSelfBlank":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Blank"]
+			"OtherKilledSelf":
+				event = config_data["Events"]["Shots"]["Other"]["Other killed Self"]
+			"OtherShotOther":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Other; Live"]
+			"OtherShotOtherSawed":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Other; Sawed"]
+			"OtherShotOtherBlank":
+				event = config_data["Events"]["Shots"]["Other"]["Other shot Other; Blank"]
+			"OtherKilledOther":
+				event = config_data["Events"]["Shots"]["Other"]["Other killed Other"]
+			"Handcuffs":
+				event = config_data["Events"]["Items"]["Handcuffs"]
+			"Beer":
+				event = config_data["Events"]["Items"]["Beer"]
+				await get_tree().create_timer(0.5).timeout
+			"Beer MP":
+				event = config_data["Events"]["Items"]["Beer"]
+				await get_tree().create_timer(0.5).timeout
+			"Magnifying Glass":
+				event = config_data["Events"]["Items"]["Magnifying Glass"]
+			"Magnifying Glass MP":
+				event = config_data["Events"]["Items"]["Magnifying Glass"]
+			"Cigarettes":
+				event = config_data["Events"]["Items"]["Cigarettes"]
+				await get_tree().create_timer(1).timeout
+			"Cigarettes MP":
+				event = config_data["Events"]["Items"]["Cigarettes"]
+				await get_tree().create_timer(1).timeout
+			"Handsaw":
+				event = config_data["Events"]["Items"]["Handsaw"]
+				await get_tree().create_timer(0.75).timeout
+			"Handsaw MP":
+				event = config_data["Events"]["Items"]["Handsaw"]
+				await get_tree().create_timer(0.75).timeout
+			"MedicineSucceed":
+				event = config_data["Events"]["Items"]["Expired Medicine"]["Succeed"]
+			"MedicineFail":
+				event = config_data["Events"]["Items"]["Expired Medicine"]["Fail"]
+			"MedicineDeath":
+				event = config_data["Events"]["Items"]["Expired Medicine"]["Death"]
+			"Inverter":
+				event = config_data["Events"]["Items"]["Inverter"]
+				await get_tree().create_timer(1.5).timeout
+			"Inverter MP":
+				event = config_data["Events"]["Items"]["Inverter"]
+				await get_tree().create_timer(1.5).timeout
+			"Burner Phone":
+				event = config_data["Events"]["Items"]["Burner Phone"]
+				await get_tree().create_timer(4).timeout
+			"Burner Phone MP":
+				event = config_data["Events"]["Items"]["Burner Phone"]
+				await get_tree().create_timer(4).timeout
+			"Adrenaline":
+				event = config_data["Events"]["Items"]["Adrenaline"]
+				await get_tree().create_timer(3.25).timeout
+			"Adrenaline MP":
+				event = config_data["Events"]["Items"]["Adrenaline"]
+				await get_tree().create_timer(3.25).timeout
+		if event["Enabled"]:
+			ModLoaderLog.info(	"Sending command: %s at %s percent, %s seconds." % 
+								[event["Action"], event["Intensity"], event["Duration"]],
+								AUTHORNAME_MODNAME_LOG_NAME)
+			MultishockCommand(event["Intensity"], event["Duration"],
+			"random" if event["Random Shocker"] else "all", event["Action"])
 
 func MultishockGetDevices():
-	socket_multishock.send_text(JSON.stringify({"auth_key": authkey_multishock, "cmd": "get_devices"}))
+	socket_multishock.send_text(JSON.stringify({
+		"auth_key": authkey_multishock,
+		"cmd": "get_devices"}))
 
 func MultishockProcessDevices(response):
 	ModLoaderLog.debug("Processing device list", AUTHORNAME_MODNAME_LOG_NAME)

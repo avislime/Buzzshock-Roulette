@@ -16,3 +16,7 @@ textures/
 default_bus_layout.tres
 gdre_export.log
 project.godot
+!mods-unpacked/Avislime-Buzzshock/extensions/scripts/
+!mods-unpacked/Avislime-Buzzshock/extensions/multiplayer/
+!mods-unpacked/Avislime-Buzzshock/extensions/multiplayer/scripts/
+!mods-unpacked/Avislime-Buzzshock/extensions/multiplayer/scripts/user scripts/
