@@ -9,189 +9,8 @@ var extensions = ["extensions/DealerIntelligence.gd",
 				  "extensions/ItemInteraction.gd",
 				  "extensions/MedicineManager.gd",
 				  "extensions/ShotgunShooting.gd"]
-var config_file = "user://buzzshock_config.json"
-var default_config_data = {
-	"Connections": {
-		"Multishock":
-			{"Enabled": true,
-			"Websocket": "ws://localhost:8765",
-			"Authkey": ""},
-	},
-	"Events":
-		{"Shots":
-			{"Player":
-				{"Player shot Dealer; Live":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":40,
-					"Duration":1,
-					"Random Shocker": false},
-				"Player shot Dealer; Sawed":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":75,
-					"Duration":1,
-					"Random Shocker": false},
-				"Player shot Dealer; Blank":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":20,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Player killed Dealer":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":100,
-					"Duration":1,
-					"Random Shocker": false},
-				"Player shot Self; Live":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":25,
-					"Duration":1,
-					"Random Shocker": false},
-				"Player shot Self; Sawed":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":50,
-					"Duration":1,
-					"Random Shocker": false},
-				"Player shot Self; Blank":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":50,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Player killed Self":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":100,
-					"Duration":1,
-					"Random Shocker": false}
-				},
-			"Dealer":
-				{"Dealer shot Player; Live":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":40,
-					"Duration":1,
-					"Random Shocker": false},
-				"Dealer shot Player; Sawed":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":75,
-					"Duration":1,
-					"Random Shocker": false},
-				"Dealer shot Player; Blank":
-					{"Enabled": false,
-					"Action": "vibrate",
-					"Intensity":20,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Dealer killed Player":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":100,
-					"Duration":1,
-					"Random Shocker": false},
-				"Dealer shot Self; Live":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":25,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Dealer shot Self; Sawed":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":50,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Dealer shot Self; Blank":
-					{"Enabled": false,
-					"Action": "vibrate",
-					"Intensity":50,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Dealer killed Self":
-					{"Enabled": true,
-					"Action": "vibrate",
-					"Intensity":50,
-					"Duration":0.3,
-					"Random Shocker": false}
-				}
-			},
-		"Items":{
-			"Handcuffs":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":10,
-				"Duration":0.6,
-				"Random Shocker": false},
-			"Beer":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":10,
-				"Duration":0.6,
-				"Random Shocker": false},
-			"Magnifying Glass":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":0.3,
-				"Random Shocker": false},
-			"Cigarettes":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":0.3,
-				"Random Shocker": false},
-			"Handsaw":{
-				"Enabled": true,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":1.25,
-				"Random Shocker": false},
-			"Expired Medicine":
-				{"Success":
-					{"Enabled": false,
-					"Action": "shock",
-					"Intensity":5,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Fail":
-					{"Enabled": false,
-					"Action": "shock",
-					"Intensity":15,
-					"Duration":0.3,
-					"Random Shocker": false},
-				"Death":
-					{"Enabled": false,
-					"Action": "shock",
-					"Intensity":25,
-					"Duration":1,
-					"Random Shocker": false}},
-			"Inverted":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":0.3,
-				"Random Shocker": false},
-			"Burner Phone":{
-				"Enabled": false,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":0.3,
-				"Random Shocker": false},
-			"Adrenaline":{
-				"Enabled": true,
-				"Action": "vibrate",
-				"Intensity":25,
-				"Duration":0.3,
-				"Random Shocker": false}
-			}
-		}
-	}
 var config_data = {}
+var ConfigManager = load("res://mods-unpacked/Avislime-Buzzshock/config_manager.gd").new()
 
 var socket_multishock = WebSocketPeer.new()
 var url_multishock = ""
@@ -211,7 +30,9 @@ func _init() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ModLoaderLog.debug("Hello world!", AUTHORNAME_MODNAME_LOG_NAME)
-	LoadConfig()
+	config_data = ConfigManager.LoadConfig()
+	authkey_multishock = config_data["Connections"]["Multishock"]["Authkey"]
+	url_multishock = config_data["Connections"]["Multishock"]["Websocket"]
 	# Initiate websocket connection to multishock.
 	if config_data["Connections"]["Multishock"]["Enabled"]:
 		ModLoaderLog.debug("Connecting to '%s' with authkey '%s'" % [url_multishock, authkey_multishock], AUTHORNAME_MODNAME_LOG_NAME)
@@ -231,26 +52,6 @@ func _ready():
 			is_multishock_connected = false
 	else:
 		ModLoaderLog.info("Multishock is disabled in config.", AUTHORNAME_MODNAME_LOG_NAME)		
-
-func LoadConfig():
-	if FileAccess.file_exists(config_file):
-		ModLoaderLog.debug("Buzzshock configuration found.", AUTHORNAME_MODNAME_LOG_NAME)
-		var file = FileAccess.open(config_file, FileAccess.READ)
-		config_data = JSON.parse_string(file.get_as_text())
-		# Load data
-		file.close()
-	else:
-		# No save file found. Creating fresh.
-		ModLoaderLog.debug("Buzzshock configuration not found. Creating with defaults.", AUTHORNAME_MODNAME_LOG_NAME)
-		var file = FileAccess.open(config_file, FileAccess.WRITE)
-		var json = JSON.stringify(default_config_data, "\t")
-		file.store_string(json)
-		file.close()
-		# Load default config data
-		config_data = default_config_data
-	authkey_multishock = config_data["Connections"]["Multishock"]["Authkey"]
-	url_multishock = config_data["Connections"]["Multishock"]["Websocket"]
-	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -288,37 +89,37 @@ func BuzzshockEvent(case):
 		"Test":
 			MultishockCommand(25, 1, "all", "vibrate")
 		"PlayerShotDealer":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Dealer; Live"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Live"]
 		"PlayerShotDealerSawed":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Dealer; Sawed"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Sawed"]
 		"PlayerShotDealerBlank":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Dealer; Blank"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Blank"]
 		"PlayerKilledDealer":
-			event = config_data["Events"]["Shots"]["Player"]["Player killed Dealer"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player killed Dealer"]
 		"PlayerShotSelf":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Live"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Live"]
 		"PlayerShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Sawed"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Sawed"]
 		"PlayerShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Blank"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Blank"]
 		"PlayerKilledSelf":
-			event = config_data["Events"]["Shots"]["Player"]["Player killed Self"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player killed Self"]
 		"DealerShotPlayer":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Player; Live"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Live"]
 		"DealerShotPlayerSawed":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Player; Sawed"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Sawed"]
 		"DealerShotPlayerBlank":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Player; Blank"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Blank"]
 		"DealerKilledPlayer":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer killed Player"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer killed Player"]
 		"DealerShotSelf":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Self; Live"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Live"]
 		"DealerShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Self; Sawed"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Sawed"]
 		"DealerShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer shot Self; Blank"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Blank"]
 		"DealerKilledSelf":
-			event = config_data["Events"]["Shots"]["Dealer"]["Dealer killed Self"]
+			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer killed Self"]
 		"Handcuffs":
 			event = config_data["Events"]["Items"]["Handcuffs"]
 		"Beer":
