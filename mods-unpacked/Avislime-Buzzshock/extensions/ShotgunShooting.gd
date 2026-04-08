@@ -39,15 +39,15 @@ func Shoot(who : String):
 			match(currentRoundInChamber):
 				"live":
 					if roundManager.currentShotgunDamage >= roundManager.health_opponent:
-						Buzzshock.BuzzshockEvent("PlayerKilledDealer")
+						Buzzshock.BuzzshockEvent("PlayerKilledOther")
 					else:
 						match(roundManager.currentShotgunDamage):
 							1:
-								Buzzshock.BuzzshockEvent("PlayerShotDealer")
+								Buzzshock.BuzzshockEvent("PlayerShotOther")
 							2:
-								Buzzshock.BuzzshockEvent("PlayerShotDealerSawed")
+								Buzzshock.BuzzshockEvent("PlayerShotOtherSawed")
 				"blank":
-					Buzzshock.BuzzshockEvent("PlayerShotDealerBlank")
+					Buzzshock.BuzzshockEvent("PlayerShotOtherBlank")
 		"self":
 			match(currentRoundInChamber):
 				"live":

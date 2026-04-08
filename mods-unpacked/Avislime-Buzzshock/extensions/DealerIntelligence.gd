@@ -34,28 +34,28 @@ func Shoot(who : String):
 			match(currentRoundInChamber):
 				"live":
 					if roundManager.currentShotgunDamage >= roundManager.health_player:
-						Buzzshock.BuzzshockEvent("DealerKilledPlayer")
+						Buzzshock.BuzzshockEvent("OtherKilledPlayer")
 					else:
 						match(roundManager.currentShotgunDamage):
 							1:
-								Buzzshock.BuzzshockEvent("DealerShotPlayer")
+								Buzzshock.BuzzshockEvent("OtherShotPlayer")
 							2:
-								Buzzshock.BuzzshockEvent("DealerShotPlayerSawed")
+								Buzzshock.BuzzshockEvent("OtherShotPlayerSawed")
 				"blank":
-					Buzzshock.BuzzshockEvent("DealerShotPlayerBlank")
+					Buzzshock.BuzzshockEvent("OtherShotPlayerBlank")
 		"self":
 			match(currentRoundInChamber):
 				"live":
 					if roundManager.currentShotgunDamage >= roundManager.health_player:
-						Buzzshock.BuzzshockEvent("DealerKilledSelf")
+						Buzzshock.BuzzshockEvent("OtherKilledSelf")
 					else:
 						match(roundManager.currentShotgunDamage):
 							1:
-								Buzzshock.BuzzshockEvent("DealerShotSelf")
+								Buzzshock.BuzzshockEvent("OtherShotSelf")
 							2:
-								Buzzshock.BuzzshockEvent("DealerShotSelfSawed")
+								Buzzshock.BuzzshockEvent("OtherShotSelfSawed")
 				"blank":
-					Buzzshock.BuzzshockEvent("DealerShotSelfBlank")
+					Buzzshock.BuzzshockEvent("OtherShotSelfBlank")
 	
 	#SUBTRACT HEALTH. ASSIGN DEALER CAN GO AGAIN. RETURN IF DEAD
 	if (currentRoundInChamber == "live" && who == "self"): 

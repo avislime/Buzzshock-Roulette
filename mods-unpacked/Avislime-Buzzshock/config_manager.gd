@@ -10,210 +10,106 @@ var default_config_data = {
 			"Websocket": "ws://localhost:8765",
 			"Authkey": ""},
 	},
-	"Events":
-		{"Shots":
-			{"Singleplayer":{
-				"Player":{
-					"Player shot Dealer; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":40,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Dealer; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":75,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Dealer; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":20,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Player killed Dealer":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":25,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Player killed Self":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false}},
-				"Dealer":
-					{"Dealer shot Player; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":40,
-						"Duration":1,
-						"Random Shocker": false},
-					"Dealer shot Player; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":75,
-						"Duration":1,
-						"Random Shocker": false},
-					"Dealer shot Player; Blank":
-						{"Enabled": false,
-						"Action": "vibrate",
-						"Intensity":20,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Dealer killed Player":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false},
-					"Dealer shot Self; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":25,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Dealer shot Self; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Dealer shot Self; Blank":
-						{"Enabled": false,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Dealer killed Self":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false}
-					}
-				},
-			"Multiplayer":{
-				"Player":{
-					"Player shot Other; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":40,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Other; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":75,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Other; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":20,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Player killed Other":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":25,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":1,
-						"Random Shocker": false},
-					"Player shot Self; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Player killed Self":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false}
-				},
-				"Other":{
-					"Other shot Player; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":40,
-						"Duration":1,
-						"Random Shocker": false},
-					"Other shot Player; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":75,
-						"Duration":1,
-						"Random Shocker": false},
-					"Other shot Player; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":20,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Other killed Player":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false},
-					"Other shot Self; Live":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":25,
-						"Duration":1,
-						"Random Shocker": false},
-					"Other shot Self; Sawed":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":1,
-						"Random Shocker": false},
-					"Other shot Self; Blank":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":50,
-						"Duration":0.3,
-						"Random Shocker": false},
-					"Other killed Self":
-						{"Enabled": true,
-						"Action": "vibrate",
-						"Intensity":100,
-						"Duration":1,
-						"Random Shocker": false}
-				}
+	"Events":{
+		"Shots":{
+			"Player":{
+				"Player shot Other; Live":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":40,
+					"Duration":1,
+					"Random Shocker": false},
+				"Player shot Other; Sawed":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":75,
+					"Duration":1,
+					"Random Shocker": false},
+				"Player shot Other; Blank":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":20,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Player killed Other":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":100,
+					"Duration":1,
+					"Random Shocker": false},
+				"Player shot Self; Live":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":25,
+					"Duration":1,
+					"Random Shocker": false},
+				"Player shot Self; Sawed":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":50,
+					"Duration":1,
+					"Random Shocker": false},
+				"Player shot Self; Blank":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":50,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Player killed Self":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":100,
+					"Duration":1,
+					"Random Shocker": false}},
+			"Other":
+				{"Other shot Player; Live":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":40,
+					"Duration":1,
+					"Random Shocker": false},
+				"Other shot Player; Sawed":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":75,
+					"Duration":1,
+					"Random Shocker": false},
+				"Other shot Player; Blank":
+					{"Enabled": false,
+					"Action": "vibrate",
+					"Intensity":20,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Other killed Player":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":100,
+					"Duration":1,
+					"Random Shocker": false},
+				"Other shot Self; Live":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":25,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Other shot Self; Sawed":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":50,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Other shot Self; Blank":
+					{"Enabled": false,
+					"Action": "vibrate",
+					"Intensity":50,
+					"Duration":0.3,
+					"Random Shocker": false},
+				"Other killed Self":
+					{"Enabled": true,
+					"Action": "vibrate",
+					"Intensity":50,
+					"Duration":0.3,
+					"Random Shocker": false}
 				}
 			},
 		"Items":{

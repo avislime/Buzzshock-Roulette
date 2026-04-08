@@ -88,38 +88,38 @@ func BuzzshockEvent(case):
 		# Grab event command parameters from config
 		"Test":
 			MultishockCommand(25, 1, "all", "vibrate")
-		"PlayerShotDealer":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Live"]
-		"PlayerShotDealerSawed":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Sawed"]
-		"PlayerShotDealerBlank":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Dealer; Blank"]
-		"PlayerKilledDealer":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player killed Dealer"]
+		"PlayerShotOther":
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Live"]
+		"PlayerShotOtherSawed":
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Sawed"]
+		"PlayerShotOtherBlank":
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Other; Blank"]
+		"PlayerKilledOther":
+			event = config_data["Events"]["Shots"]["Player"]["Player killed Other"]
 		"PlayerShotSelf":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Live"]
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Live"]
 		"PlayerShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Sawed"]
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Sawed"]
 		"PlayerShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player shot Self; Blank"]
+			event = config_data["Events"]["Shots"]["Player"]["Player shot Self; Blank"]
 		"PlayerKilledSelf":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Player"]["Player killed Self"]
-		"DealerShotPlayer":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Live"]
-		"DealerShotPlayerSawed":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Sawed"]
-		"DealerShotPlayerBlank":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Player; Blank"]
-		"DealerKilledPlayer":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer killed Player"]
-		"DealerShotSelf":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Live"]
-		"DealerShotSelfSawed":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Sawed"]
-		"DealerShotSelfBlank":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer shot Self; Blank"]
-		"DealerKilledSelf":
-			event = config_data["Events"]["Shots"]["Singleplayer"]["Dealer"]["Dealer killed Self"]
+			event = config_data["Events"]["Shots"]["Player"]["Player killed Self"]
+		"OtherShotPlayer":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Live"]
+		"OtherShotPlayerSawed":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Sawed"]
+		"OtherShotPlayerBlank":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Player; Blank"]
+		"OtherKilledPlayer":
+			event = config_data["Events"]["Shots"]["Other"]["Other killed Player"]
+		"OtherShotSelf":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Live"]
+		"OtherShotSelfSawed":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Sawed"]
+		"OtherShotSelfBlank":
+			event = config_data["Events"]["Shots"]["Other"]["Other shot Self; Blank"]
+		"OtherKilledSelf":
+			event = config_data["Events"]["Shots"]["Other"]["Other killed Self"]
 		"Handcuffs":
 			event = config_data["Events"]["Items"]["Handcuffs"]
 		"Beer":
