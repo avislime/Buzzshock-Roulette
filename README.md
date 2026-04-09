@@ -1,5 +1,5 @@
 # Buzzshock Roulette
-## Customizable [Pishock]([https://mshock.akiradev.me/](https://pishock.com/)) and [Intiface Central](https://intiface.com/) integration for Buckshot Roulette
+## Customizable [Pishock](https://pishock.com/) and [Intiface Central](https://intiface.com/) integration for Buckshot Roulette
 
 Made on Buckshot Roulette 2.2.0.6, built for [BRML-E](https://github.com/D1GQ/BuckshotRouletteModLoaderExtended) 1.0.2.
 Made this in 2 days after having 0 knowledge on scripting in Godot for fun. Not much else to it, nor is it tested super thoroughly. It's on the list, however.
