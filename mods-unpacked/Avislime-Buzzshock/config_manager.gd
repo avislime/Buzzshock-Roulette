@@ -183,7 +183,7 @@ var default_config_data = {
 				"Death":
 					{"Enabled": true,
 					"Action": "shock",
-					"Intensity":8,
+					"Intensity":5,
 					"Duration":1,
 					"Random Shocker": false}},
 			"Inverter":{

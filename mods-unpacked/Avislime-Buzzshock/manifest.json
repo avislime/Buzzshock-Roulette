@@ -1,7 +1,7 @@
 {
 	"name": "Buzzshock",
 	"namespace": "Avislime",
-	"version_number": "0.1.0",
+	"version_number": "0.2.0",
 	"description": "Customizable Multishock/Pishock integration for Buckshot Roulette.",
 	"dependencies": [],
 	"website_url": "",
