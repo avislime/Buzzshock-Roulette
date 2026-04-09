@@ -14,6 +14,7 @@ Features:
     * Player Jammed has a distinct event
 * Flexible event configuration
   * Config is in human readable JSON (Located within %AppData$\Godot\app_userdata\Buckshot Roulette - Modded)
+  * Each individual event allows for device type, action, intensity, and duration to be changed.
 
 Todo:
   * Actually sane configuration defaults
