@@ -5,10 +5,13 @@ Made on Buckshot Roulette 2.2.0.6, built for [BRML-E](https://github.com/D1GQ/Bu
 Made this in 2 days after having 0 knowledge on scripting in Godot for fun. Not much else to it, nor is it tested super thoroughly. It's on the list, however.
 
 Features:
+* Support for [Multishock](https://mshock.akiradev.me/) and [Intiface Central](https://intiface.com/)
 * Granular event types
-  * Gunshots (Bullet live or blank, sawed, killing blow, shooter and target)
-  * All Double or Nothing Items
-    * Expired medicine outcomes have separate events
+  * Gunshots
+    * Distinct events for if bullet is live or blank, sawed off/double damage, and if it kills
+  * Individiaul events for all items
+    * Expired Medicine outcomes have distinct events
+    * Player Jammed has a distinct event
 * Config in human readable JSON (Located within %AppData$\Godot\app_userdata\Buckshot Roulette - Modded)
 
 Todo:
@@ -16,4 +19,3 @@ Todo:
   * Add Events for kicking the doors down. For the bit.
   * Port to BRMLNeo (On hold until release)
   * Multiplayer support (On hold)
-  * Intiface support (Maybe)
