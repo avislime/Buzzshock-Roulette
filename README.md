@@ -9,7 +9,7 @@ Features:
 * Granular event types
   * Gunshots
     * Distinct events for if bullet is live or blank, sawed off/double damage, and if it kills
-  * Individiaul events for all items
+  * Individual events for all items
     * Expired Medicine outcomes have distinct events
     * Player Jammed has a distinct event
 * Flexible event configuration
